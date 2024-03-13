@@ -1,5 +1,7 @@
 export interface initGameConfig {
     roomId: string;
     playerId: string;
-    secretCode: string | number;
+    playerName: string;
 }
+
+export type GameStatus = "X" | "O" | "INCOMPLETE" | "DRAW";

@@ -1,6 +1,7 @@
-import { Router } from "express";
-import { initGame } from "../controlers/initGame.controler";
+import { NextFunction, Request, Response, Router } from "express";
 
 export const router = Router();
 
-router.route("/").get(initGame);
+router.route("/").get((req: Request, res: Response, next: NextFunction) => {
+    res.send("hello from tic-tac-toe backend");
+});

@@ -1,10 +1,17 @@
-import mongoose, { model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const playerSchema = new Schema({
-    playerId: {
+    playerName: {
         type: String,
         required: true,
-        unique: true,
+    },
+    turn: {
+        type: String,
+        enum: {
+            values: ["X", "O"],
+            message: "{VALUE} is not supported",
+        },
+        required: true,
     },
 });
 
@@ -14,11 +21,16 @@ const gameSchema = new Schema({
         required: [true, "room id is required to create a game"],
         unique: [true, "room id need to be unique"],
     },
+    confirmationId: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     gameBord: {
         type: Array,
         default: Array(9).fill(-1),
     },
-    turn: {
+    lastTurn: {
         type: String,
         enum: {
             values: ["X", "O"],
@@ -28,7 +40,12 @@ const gameSchema = new Schema({
         required: [true, "turn is required"],
     },
     winner: {
-        type: ["X", "O", "DRAW", "INCOMPLETE"],
+        type: String,
+        enum: {
+            values: ["X", "O", "DRAW", "INCOMPLETE"],
+            message: "{VALUE} is not supported",
+        },
+        default: "INCOMPLETE",
     },
     players: [playerSchema],
 });
