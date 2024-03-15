@@ -118,7 +118,11 @@ const namespace = (io: Server) => {
                         io.to(roomId).emit("game-draw", updatedGame);
                         break;
                     }
-                    case "X" || "O": {
+                    case "X": {
+                        io.to(roomId).emit("game-win", updatedGame);
+                        break;
+                    }
+                    case "O": {
                         io.to(roomId).emit("game-win", updatedGame);
                         break;
                     }
